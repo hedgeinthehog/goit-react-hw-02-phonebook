@@ -34,6 +34,20 @@ class App extends React.Component {
         }));
   };
 
+  deleteContact = id => {
+    const { contacts } = this.state;
+    const contactId = contacts.findIndex(contact => contact.id === id);
+
+    this.setState(prevState => {
+      const updatedContacts = [...prevState.contacts];
+      updatedContacts.splice(contactId, 1);
+
+      return {
+        contacts: updatedContacts,
+      };
+    });
+  };
+
   filterContacts = () => {
     const { contacts } = this.state;
     const filter = this.state.filter.toLowerCase();
@@ -53,7 +67,7 @@ class App extends React.Component {
         <ContactForm onSubmit={this.addNewContact} />
         <h2>Contacts</h2>
         <Filter filter={filter} onChange={this.updateFilter} />
-        <ContactList contacts={filteredContacts} />
+        <ContactList contacts={filteredContacts} onClick={this.deleteContact} />
       </>
     );
   }
