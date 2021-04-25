@@ -4,7 +4,15 @@ import Section from '../Section';
 
 class App extends React.Component {
   state = {
-    contacts: [],
+    contacts: [
+      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+      { id: 'id-5', name: 'Minion da Bob', number: '459-12-56' },
+      { id: 'id-6', name: 'Bobo', number: '443-89-12' },
+    ],
+    filter: '',
     name: '',
     number: '',
   };
@@ -32,8 +40,19 @@ class App extends React.Component {
     this.setState({ name: '', number: '' });
   };
 
+  filterContacts = () => {
+    const { contacts } = this.state;
+    const filter = this.state.filter.toLowerCase();
+
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(filter),
+    );
+  };
+
   render() {
-    const { contacts, name, number } = this.state;
+    const { name, number, filter } = this.state;
+
+    const filteredContacts = this.filterContacts();
 
     return (
       <>
@@ -64,8 +83,17 @@ class App extends React.Component {
           </form>
         </Section>
         <Section title="contacts">
+          <label>
+            Find contacts by name
+            <input
+              type="text"
+              name="filter"
+              value={filter}
+              onChange={this.handleChange}
+            />
+          </label>
           <ul>
-            {contacts.map(contact => (
+            {filteredContacts.map(contact => (
               <li key={contact.id}>
                 {contact.name} {contact.number}
               </li>
