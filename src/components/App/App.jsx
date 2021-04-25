@@ -1,5 +1,4 @@
 import React from 'react';
-import Section from '../Section';
 import ContactForm from '../ContactForm';
 import Filter from '../Filter';
 import ContactList from '../ContactList';
@@ -50,13 +49,11 @@ class App extends React.Component {
 
     return (
       <>
-        <Section title="phonebook">
-          <ContactForm onSubmit={this.addNewContact} />
-        </Section>
-        <Section title="contacts">
-          <Filter filter={filter} onChange={this.updateFilter} />
-          <ContactList contacts={filteredContacts} />
-        </Section>
+        <h1>Phonebook</h1>
+        <ContactForm onSubmit={this.addNewContact} />
+        <h2>Contacts</h2>
+        <Filter filter={filter} onChange={this.updateFilter} />
+        <ContactList contacts={filteredContacts} />
       </>
     );
   }
