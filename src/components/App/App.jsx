@@ -31,7 +31,7 @@ class App extends React.Component {
     isInContacts
       ? alert(`${newContact.name} is already in contacts`)
       : this.setState(prevState => ({
-          contacts: [...prevState.contacts, newContact],
+          contacts: [newContact, ...prevState.contacts],
         }));
   };
 
