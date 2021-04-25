@@ -23,9 +23,16 @@ class App extends React.Component {
   };
 
   addNewContact = newContact => {
-    this.setState(prevState => ({
-      contacts: [...prevState.contacts, newContact],
-    }));
+    const { contacts } = this.state;
+    const isInContacts = contacts.find(
+      contact => contact.name === newContact.name,
+    );
+
+    isInContacts
+      ? alert(`${newContact.name} is already in contacts`)
+      : this.setState(prevState => ({
+          contacts: [...prevState.contacts, newContact],
+        }));
   };
 
   filterContacts = () => {
